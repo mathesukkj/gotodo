@@ -41,3 +41,27 @@ func CreateTodo(c echo.Context) error {
 
 	return c.NoContent(http.StatusCreated)
 }
+
+func UpdateTodo(c echo.Context) error {
+	todo := models.TodoPayload{}
+	err := json.NewDecoder(c.Request().Body).Decode(&todo)
+	if err != nil {
+		log.Fatal("error while decoding json!")
+	}
+
+	foundTodo := models.Todo{}
+	db.Gorm.First(&foundTodo, c.Param("id"))
+
+	foundTodo.Status = todo.Status
+	foundTodo.Task = todo.Task
+
+	db.Gorm.Save(&foundTodo)
+
+	return c.JSON(http.StatusOK, foundTodo)
+}
+
+func DeleteTodo(c echo.Context) error {
+	db.Gorm.Delete(&models.Todo{}, c.Param("id"))
+
+	return c.NoContent(http.StatusNoContent)
+}

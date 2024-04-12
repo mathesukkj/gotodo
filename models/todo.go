@@ -9,5 +9,6 @@ type Todo struct {
 }
 
 type TodoPayload struct {
-	Task string `json:"task"`
+	Task   string `json:"task"`
+	Status bool   `json:"status"`
 }

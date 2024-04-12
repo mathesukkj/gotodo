@@ -3,6 +3,8 @@ package db
 import (
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
+
+	"gotodo/models"
 )
 
 var Gorm *gorm.DB
@@ -13,6 +15,8 @@ func Init() error {
 	if err != nil {
 		return err
 	}
+
+	db.AutoMigrate(&models.Todo{})
 
 	Gorm = db
 

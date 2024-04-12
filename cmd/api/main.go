@@ -18,7 +18,8 @@ func main() {
 		log.Fatal("couldnt connect to the database!")
 	}
 
-	e.GET("/", handlers.GetTodos)
+	e.GET("/todo", handlers.GetTodos)
+	e.POST("/todo", handlers.CreateTodo)
 
 	e.Logger.Fatal(e.Start(":2023"))
 }

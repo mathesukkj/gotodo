@@ -19,6 +19,7 @@ func main() {
 	}
 
 	e.GET("/todo", handlers.GetTodos)
+	e.GET("/todo/:id", handlers.GetTodo)
 	e.POST("/todo", handlers.CreateTodo)
 
 	e.Logger.Fatal(e.Start(":2023"))
